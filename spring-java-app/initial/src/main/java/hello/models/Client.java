@@ -17,16 +17,25 @@ public class Client {
       this.id = id;
   }
 
-  public String getName() {
+  public String getFirstName() {
       
-      return this.firstName + this.lastName;
+      return this.firstName ;
+  }
+
+  public String getLastName() {
+      
+      return this.lastName ;
   }
 
   public int getId() {
     return this.id;
   }
 
-  public void setName(String name) {
-    this.lastName = name;
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 }

@@ -34,7 +34,7 @@
   <hr/>
  
   <div class="container">
-    <div ng-controller="HomeController">
+    <div>
       <h1>{{ helloWorld }}</h1>
     </div>
   </div>
@@ -44,6 +44,7 @@
 
   <!-- /resources1 -->
   <div class="container">
+  <div ng-controller = "ClientController">
     <h1 id = "1">Client</h1>
     <h2>Lista Clienti</h2>
     <table class="table table-striped">
@@ -53,10 +54,10 @@
         <th>Prenume</th>
         <th style="width:210px;">Options</th>
       </tr>
-      <tr>
-        <td>100</td>
-         <td>John</td>
-         <th>Traian</th>
+      <tr ng-repeat="client in clienti.data" data-id="{{client.id}}">
+         <td>{{client.id}}</td>
+         <td>{{client.firstName}}</td>
+         <td>{{client.lastName}}</td>
         <td>
           <a href="">
             <span class="label label-success">
@@ -65,63 +66,13 @@
             </span>
           </a>
           <a href="">
-            <span class="label label-primary">
+            <span ng-click="setUpdateClient(client)" class="btn btn-info btn-xs">
               Edit
               <span class="glyphicon glyphicon-edit"></span>
             </span>
           </a>
           <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>101</td>
-         <td>Steve</td>
-         <th>Caraman</th>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>102</td>
-         <td>Larry</td>
-         <th>Gheorghe</th>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
+            <span ng-click="deleteClient(client.id)" class="btn btn-danger btn-xs">
               Remove
               <span class="glyphicon glyphicon-remove"></span>
             </span>
@@ -137,15 +88,15 @@
         <form action="" method="">
           <div class="form-group">
             <label for="attribute1">ID</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="ID">
+            <input type="text" class="form-control" id="attribute1" placeholder="ID" ng-model="editClient.id">
           </div>
           <div class="form-group">
             <label for="attribute2">Nume</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Nume">
+            <input type="text" class="form-control" id="attribute2" placeholder="Nume" ng-model="editClient.firstName">
           </div>
           <div class="form-group">
             <label for="attribute3">Prenume</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Prenume">
+            <input type="text" class="form-control" id="attribute3" placeholder="Prenume" ng-model="editClient.lastName">
           </div>
           <button type="submit" class="btn btn-info">Save</button>
         </form>
@@ -157,39 +108,39 @@
         <form action="" method="">
           <div class="form-group">
             <label for="attribute1">ID</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="ID">
+            <input type="text" class="form-control" id="attribute1" placeholder="ID" ng-model="client.id">
           </div>
           <div class="form-group">
             <label for="attribute2">Nume</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Nume">
+            <input type="text" class="form-control" id="attribute2" placeholder="Nume" ng-model="client.firstName">
           </div>
           <div class="form-group">
             <label for="attribute3">Prenume</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Prenume">
-          <button type="submit" class="btn btn-success">Add</button>
+            <input type="text" class="form-control" id="attribute3" placeholder="Prenume" ng-model="client.lastName">
+          <button type="submit" ng-click="addClient(client)" class="btn btn-success">Add</button>
         </form>
       </div>
     </div>
-
-    
+ 
 
   <hr/>
 
   <!-- /resources2-->
   <div class="container">
-    <h1 id = "2">Bon</h1>
-    <h2>Lista bonuri</h2>
+  <div ng-controller = "BonController">
+    <h1 id = "1">Bon</h1>
+    <h2>Lista Bonuri</h2>
     <table class="table table-striped">
       <tr>
         <th>ID</th>
-        <th>Suma</th>
+        <th>Total</th>
         <th>Ora</th>
         <th style="width:210px;">Options</th>
       </tr>
-      <tr>
-        <td>10</td>
-         <td>1500</td>
-         <td>10:00</td>
+      <tr ng-repeat="bon in bonuri.data" data-id="{{bon.id}}">
+         <td>{{bon.id}}</td>
+         <td>{{bon.total}}</td>
+         <td>{{bon.ora}}</td>
         <td>
           <a href="">
             <span class="label label-success">
@@ -198,63 +149,13 @@
             </span>
           </a>
           <a href="">
-            <span class="label label-primary">
+            <span ng-click="setUpdateBon(client)" class="btn btn-info btn-xs">
               Edit
               <span class="glyphicon glyphicon-edit"></span>
             </span>
           </a>
           <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>11</td>
-         <td>100</td>
-         <td>16:00</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>12</td>
-         <td>400</td>
-         <td>18:00</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
+            <span ng-click="deleteBon(client.id)" class="btn btn-danger btn-xs">
               Remove
               <span class="glyphicon glyphicon-remove"></span>
             </span>
@@ -270,15 +171,15 @@
         <form action="" method="">
           <div class="form-group">
             <label for="attribute1">ID</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="ID">
+            <input type="text" class="form-control" id="attribute1" placeholder="ID" ng-model="editBon.id">
           </div>
           <div class="form-group">
-            <label for="attribute2">Suma</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Suma">
+            <label for="attribute2">Total</label>
+            <input type="text" class="form-control" id="attribute2" placeholder="Total" ng-model="editBon.total">
           </div>
           <div class="form-group">
-            <label for="attribute1">Ora</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Ora">
+            <label for="attribute3">Ora</label>
+            <input type="text" class="form-control" id="attribute3" placeholder="Ora" ng-model="editBon.ora">
           </div>
           <button type="submit" class="btn btn-info">Save</button>
         </form>
@@ -290,34 +191,37 @@
         <form action="" method="">
           <div class="form-group">
             <label for="attribute1">ID</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="ID">
+            <input type="text" class="form-control" id="attribute1" placeholder="ID" ng-model="bon.id">
           </div>
           <div class="form-group">
-            <label for="attribute2">Suma</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Suma">
+            <label for="attribute2">Total</label>
+            <input type="text" class="form-control" id="attribute2" placeholder="Total" ng-model="bon.total">
           </div>
           <div class="form-group">
-            <label for="attribute1">Ora</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Ora">
-          </div>
-          <button type="submit" class="btn btn-success">Add</button>
+            <label for="attribute3">Ora</label>
+            <input type="text" class="form-control" id="attribute3" placeholder="Ora" ng-model="bon.ora">
+          <button type="submit" ng-click="addBon(bon)" class="btn btn-success">Add</button>
         </form>
       </div>
     </div>
+ 
 
+  <hr/>
 
-    <div class="container">
-    <h1 id = "3">Produs</h1>
+  <div class="container">
+  <div ng-controller = "ProdusController">
+    <h1 id = "1">Produs</h1>
     <h2>Lista Produse</h2>
     <table class="table table-striped">
       <tr>
         <th>ID</th>
-        <th>DEnumire Produs</th>
+        <th>Nume</th>
+        
         <th style="width:210px;">Options</th>
       </tr>
-      <tr>
-        <td>1</td>
-         <td>Arduino</td>
+      <tr ng-repeat="produs in produse.data" data-id="{{produs.id}}">
+         <td>{{produs.id}}</td>
+         <td>{{produs.name}}</td>
         <td>
           <a href="">
             <span class="label label-success">
@@ -326,61 +230,13 @@
             </span>
           </a>
           <a href="">
-            <span class="label label-primary">
+            <span ng-click="setUpdateProdus(client)" class="btn btn-info btn-xs">
               Edit
               <span class="glyphicon glyphicon-edit"></span>
             </span>
           </a>
           <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-         <td>LCD</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>3</td>
-         <td>ShiftRegister</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
+            <span ng-click="deleteProdus(produs.id)" class="btn btn-danger btn-xs">
               Remove
               <span class="glyphicon glyphicon-remove"></span>
             </span>
@@ -396,12 +252,13 @@
         <form action="" method="">
           <div class="form-group">
             <label for="attribute1">ID</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="ID">
+            <input type="text" class="form-control" id="attribute1" placeholder="ID" ng-model="editProdus.id">
           </div>
           <div class="form-group">
-            <label for="attribute2">Denumire Produs</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Denumire Produs">
+            <label for="attribute2">Name</label>
+            <input type="text" class="form-control" id="attribute2" placeholder="Name" ng-model="editProdus.total">
           </div>
+          
           <button type="submit" class="btn btn-info">Save</button>
         </form>
       </div>
@@ -412,22 +269,22 @@
         <form action="" method="">
           <div class="form-group">
             <label for="attribute1">ID</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="ID">
+            <input type="text" class="form-control" id="attribute1" placeholder="ID" ng-model="produs.id">
           </div>
           <div class="form-group">
-            <label for="attribute2">Denumire Produs</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Denumire Produs">
+            <label for="attribute2">Name</label>
+            <input type="text" class="form-control" id="attribute2" placeholder="Name" ng-model="produs.total">
           </div>
-          <button type="submit" class="btn btn-success">Add</button>
+          <button type="submit" ng-click="addBon(bon)" class="btn btn-success">Add</button>
         </form>
       </div>
     </div>
-    </div>
-
-    
-
+ 
 
   <hr/>
+
+
+    
 
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/bootstrap.min.js"></script>

@@ -61,11 +61,13 @@ public class BonController {
       return new ResponseEntity<Bon>(b, new HttpHeaders(), HttpStatus.OK);
       }
 
-@RequestMapping(value="/bon/{id}/{ora}", method = RequestMethod.PUT)
-  public ResponseEntity put(@PathVariable("id") int id  , @PathVariable("ora") String ora) {
+@RequestMapping(value="/bon/{id}/{ora}/{total}", method = RequestMethod.PUT)
+  public ResponseEntity put(@PathVariable("id") int id  , @PathVariable("ora") String ora , @PathVariable("total") int total)
+  {
     for(Bon b : this.bonuri) {
       if(b.getId() == id) {
         b.setOra(ora);
+        b.setTotal(total);
         return new ResponseEntity<Bon>(b, new HttpHeaders(), HttpStatus.OK);
       }
     }

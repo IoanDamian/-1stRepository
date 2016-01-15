@@ -18,7 +18,11 @@ public class Bon {
   }
 
   public String getOra() {
-      return this.total + " la ora : "  + this.ora;
+      return  this.ora;
+  }
+
+  public int getTotal() {
+      return  this.total;
   }
 
   public int getId() {
@@ -27,5 +31,9 @@ public class Bon {
 
   public void setOra(String ora) {
     this.ora = ora;
+  }
+
+  public void setTotal(int total) {
+    this.total = total;
   }
 }

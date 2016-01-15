@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import java.util.List;
+import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 
@@ -53,19 +54,19 @@ public class ClientController {
   }
 
 
-@RequestMapping(value="/client/{id}/{lastName}/{firstName}", method = RequestMethod.POST)
-  public ResponseEntity create(@PathVariable("id") int id , @PathVariable("lastName") String lastName, @PathVariable("firstName") String firstName) {
+@RequestMapping(value="/client", method = RequestMethod.POST)
+  public ResponseEntity create(@RequestBody Client c) {
 
-    Client c = new Client(id,lastName,firstName);
       clienti.add(c);
       return new ResponseEntity<Client>(c, new HttpHeaders(), HttpStatus.OK);
       }
 
-@RequestMapping(value="/client/{id}/{lastName}", method = RequestMethod.PUT)
-  public ResponseEntity put(@PathVariable("id") int id  , @PathVariable("lastName") String lastName) {
+@RequestMapping(value="/client/{id}/{firstName}/{lastName}", method = RequestMethod.PUT)
+  public ResponseEntity put(@PathVariable("id") int id  , @PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName ) {
     for(Client c : this.clienti) {
       if(c.getId() == id) {
-        c.setName(lastName);
+        c.setFirstName(firstName);
+        c.setLastName(lastName);
         return new ResponseEntity<Client>(c, new HttpHeaders(), HttpStatus.OK);
       }
     }
