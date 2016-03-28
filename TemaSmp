@@ -1,0 +1,254 @@
+
+org 100h
+
+jmp code
+w equ 10
+h equ 5
+
+code: mov ah, 0     ; trecere in mod grafic vga
+      mov al, 13h
+      int 10h    
+      
+      mov cx, 100   ; pozitie (x,y) = (100,165)
+      mov dx, 165
+      mov  al,15   
+    
+                
+     u2: mov ah,0ch    ; desenez prima linie din coloana decrementand y->40
+        int 10h
+        dec dx
+        cmp dx,40
+        jae u2 
+          
+        mov cx, 160    ; pozitie (x,y) = (165,165)
+        mov dx, 165
+        mov al, 15   
+        
+     u6: mov ah, 0ch    ; desenez a doua linie din coloana decrementand y->40
+        int 10h
+        dec dx
+        cmp dx,40
+        jae u6     
+        
+        mov cx, 120     ; desenez texturile din coloana  pozitie (x,y) = (120,165)
+        mov dx, 165
+        mov al, 20
+     
+     u8: mov ah, 0ch    ; y->40
+         int 10h
+         dec dx
+         cmp dx,40
+         jae u8     
+                
+        mov cx, 140     ; pozitie (x,y) = (140,165)
+        mov dx, 165
+        mov al, 20
+     
+     u9: mov ah, 0ch    ; y->40
+         int 10h
+         dec dx
+         cmp dx,40
+         jae u9  
+         
+         
+        mov cx, 115     ; texturi ...   pozitie (x,y) = (115,165)
+        mov dx, 165
+        mov al, 20
+     
+     u50: mov ah, 0ch   ; y->40
+         int 10h
+         dec dx
+         cmp dx,40
+         jae u50     
+                
+        mov cx, 145     ; pozitie (x,y) = (145,165)
+        mov dx, 165
+        mov al, 20
+     
+     u51: mov ah, 0ch   ; y->40
+         int 10h
+         dec dx
+         cmp dx,40
+         jae u51 
+                      
+        mov cx, 170     ; desenez arcul coloanei  pozitie (x,y) = (170,35)
+        mov dx, 35  
+        mov al, 15
+        
+     u12: mov ah, 0ch   ; x->90
+          int 10h
+          dec cx
+          cmp cx, 90
+          jae u12     
+          
+        mov cx,170      ;  pozitie (x,y) = (170,45)
+        mov dx, 45
+        mov al, 15
+           
+     u13: mov ah, 0ch   ; y->35
+          int 10h
+          dec dx
+          cmp dx,35
+          jae u13
+          
+        mov cx, 90      ; pozitie (x,y) = (90,45)
+        mov dx, 45
+        mov al, 15
+     
+     u14: mov ah,0ch    ; y->35
+          int 10h
+          dec dx
+          cmp dx,35
+          jae u14
+          
+      mov cx, 170  ; efect 3d pozitie (x,y) = (170,35)
+      mov dx, 35
+      mov al, 15   
+        
+     u15: mov ah, 0ch    ; x->200 y->15
+        int 10h
+        inc cx
+        cmp cx,200
+        dec dx
+        cmp dx,15
+        jae u15   
+        
+      mov cx, 90  ; efect 3d pozitie (x,y) = (90,35)
+      mov dx, 35
+      mov al, 15   
+        
+     u16: mov ah, 0ch   ; x->120 y->15
+        int 10h
+        inc cx
+        cmp cx,120
+        dec dx
+        cmp dx,15
+        jae u16  
+        
+      mov cx, 190  ; pozitie (x,y) = (190,15)
+      mov dx, 15                           
+      mov al, 15
+     
+     u17: mov ah,0ch    ; doar  linia orizontala din spate x->110
+          int 10h
+          dec cx
+          cmp cx, 110
+          jae u17    
+          
+     mov cx, 190     ; pozitie (x,y) = (190,25)
+     mov dx, 25
+     mov al, 15
+     
+     u18: mov ah, 0ch  ; y->15
+          int 10h
+          dec dx
+          cmp dx, 15
+          jae u18  
+          
+     mov cx, 180    ;linie verticala spate pozitie (x,y) = (180,155)
+     mov dx, 155
+     mov al, 15
+     
+     u19: mov ah, 0ch   ; y->25
+          int 10h
+          dec dx
+          cmp dx,25
+          jae u19     
+          
+          
+     mov cx, 170    ; baza linie verticala fata pozitie (x,y) = (170,175)
+     mov dx, 175
+     mov al, 15
+     
+     u100: mov ah,0ch  ; x->90
+          int 10h
+          dec cx
+          cmp cx,90
+          jae u100    
+          
+      mov cx, 170  ; efect 3d baza  pozitie (x,y) = (170,175)
+      mov dx, 175
+      mov al, 15   
+        
+     u101: mov ah, 0ch ; x->190 y->155
+        int 10h
+        inc cx
+        cmp cx,190
+        dec dx
+        cmp dx,155
+        jae u101  
+        
+        mov cx, 175     ; desenez texturile din coloana pe fata din dreapata  pozitie (x,y) = (175,160)
+        mov dx, 160
+        mov al, 20
+     
+     u102: mov ah, 0ch  ; y->35
+         int 10h
+         dec dx
+         cmp dx,35
+         jae u102     
+                
+        mov cx, 170    ; pozitie (x,y) = (170,165)
+        mov dx, 165
+        mov al, 20
+     
+     u103: mov ah, 0ch  ; y->40
+         int 10h
+         dec dx
+         cmp dx,40
+         jae u103 
+         
+INCLUDE 'emu8086.inc'
+
+mov ah,00       ; trecere in mod text noua fereastra
+int 16h 
+
+mov ah, 00
+mov al, 13h ; mod grafic 256 culori, 320x200 pixels 
+int 10h
+
+printn ' Zeus shall guide your path!'   ; printeaza 
+LEA SI, msg           ; mesaj msg
+call print_string     ; printeaza msg
+call scan_num         ; preia numar de la tastatura stocheaza in cx
+
+MOV AX, cx            ;in registrul ax se pune continutul lui cx 
+
+putc 13               ; noua linie
+putc 10
+lea si, msg1          ; mesaj msg1
+call print_string     ; printeaza msg1
+call scan_num         ; preia numar de la tastatura stocheaza in cx
+
+MOV BX, cx            ; in registrul bx se pune continutul nou al lui cx
+IMUL BX               ; inmulteste bx cu ax si rezultatul se pune in ax
+
+putc 13               ; noua line
+putc 10  
+lea si, msg2          
+call print_string     ; printeaza msg2
+CALL PRINT_NUM_uns    ; printeaza continutul lui ax(ax=ax*bx)
+
+mov bx, 4             ; in bx se pune valoarea 4
+imul bx               ; ax = ax*4
+
+putc 13               ; noua linie
+putc 10
+lea si, msg3          
+call print_string     ; printeaza msg3
+call print_num_uns    ; printeaza rezultatul inmultirii ax*4
+
+msg db 'Enter height :',0  
+msg1 db 'Enter width : ', 0
+msg2 db 'This is only 1 surface:',0
+msg3 db 'This is the whole surface:', 0 
+
+DEFINE_PRINT_NUM_uns  ; metoda de printare din registrul ax
+define_print_string   ; metoda de printare string
+define_scan_num       ; metoda de citire de la tastatura
+
+ret
+
+
+
+
